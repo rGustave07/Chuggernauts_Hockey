@@ -6,6 +6,7 @@ module.exports = {
 	transform: {
 		"\\.[jt]sx?$": "babel-jest",
 	},
+	testMatch: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
 	globals: {
 		'ts-jest': {
 			babelConfig: require('./babel.config'),

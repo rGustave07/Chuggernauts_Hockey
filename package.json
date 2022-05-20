@@ -47,7 +47,7 @@
     "vite-plugin-eslint": "^1.6.1"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": ["npm run lint", "npx jest --findRelatedTests"]
+    "*.{js,jsx,ts,tsx}": ["npm run lint", "npx jest"]
   },
   "config": {
     "commitizen": {

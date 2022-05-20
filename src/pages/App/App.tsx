@@ -1,6 +1,6 @@
-import { useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import { useState } from 'react';
+import logo from './logo.svg';
+import './App.css';
 
 const App = () => {
 	const [count, setCount] = useState(0);
@@ -30,7 +30,7 @@ const App = () => {
 					>
 						Learn React
 					</a>
-					{" | "}
+					{' | '}
 					<a
 						className="App-link"
 						href="https://vitejs.dev/guide/features.html"

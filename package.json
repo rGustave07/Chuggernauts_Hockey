@@ -7,8 +7,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "npx eslint . --ext .ts,.tsx",
-    "commit": "cz",
-    "prepare": "husky install front/.husky",
+    "commitcode": "git-cz",
+    "prepare": "husky install",
     "test": "npx jest"
   },
   "dependencies": {
@@ -38,9 +38,13 @@
     "jest": "^28.1.0",
     "jest-environment-jsdom": "^28.1.0",
     "jsdom": "^19.0.0",
+    "lint-staged": "^12.4.1",
     "ts-jest": "^28.0.2",
     "typescript": "^4.6.3",
     "vite": "^2.9.9"
+  },
+  "lint-staged": {
+    "*.{ts}": "eslint --ext .ts,.tsx && npm run test"
   },
   "config": {
     "commitizen": {
@@ -49,7 +53,8 @@
   },
   "husky": {
     "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && npx cz --hook || true"
+      "pre-commit": "lint-staged",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
   }
 }

@@ -7,10 +7,10 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "type-check": "tsc --noemit --skipLibCheck",
-    "lint": "npx eslint . --ext .ts,.tsx",
+    "lint": "./node_modules/.bin/eslint . --ext .ts,.tsx",
     "commit": "git-cz",
     "prepare": "husky install",
-    "test": "npx jest ."
+    "test": "./node_modules/.bin/jest"
   },
   "dependencies": {
     "react": "^18.0.0",

@@ -1,0 +1,21 @@
+# .github/workflows/test.yml
+
+name: Test
+on:
+  push:
+jobs:
+  verify-tests-pass-before-merge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - name: Install dependencies
+        run: npm install
+      - name: Run linting checks code format
+        run: npm run lint
+      - name: Build application
+        run: npm run build
+      - name: Execute tests
+        run: npm run test

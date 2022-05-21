@@ -47,7 +47,6 @@
     "vite": "^2.9.9",
     "vite-plugin-eslint": "^1.6.1"
   },
-  "lint-staged": {},
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
@@ -55,7 +54,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "npx lint-staged --config ./lint-staged.config.js"
     }
   }
 }

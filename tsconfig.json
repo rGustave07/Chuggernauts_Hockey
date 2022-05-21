@@ -1,11 +1,10 @@
 {
 	"compilerOptions": {
-		"types": ["jest", "vite/client"],
+		"types": ["vite/client"],
 		"target": "ESNext",
 		"useDefineForClassFields": true,
 		"lib": ["DOM", "DOM.Iterable", "ESNext"],
 		"allowJs": true,
-		"skipLibCheck": true,
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
 		"strict": true,
@@ -25,5 +24,4 @@
 	},
 	"include": ["**/*.ts", "**/*.tsx", "./src/*"],
 	"exclude": ["/node_modules/"],
-	"references": [{ "path": "./tsconfig.node.json" }]
 }

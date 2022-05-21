@@ -1,6 +1,6 @@
 module.exports = {
-	parser: '@typescript-eslint/parser',
-	plugins: ['react', 'jest', '@typescript-eslint'],
+	parser: "@typescript-eslint/parser",
+	plugins: ["prettier", "react", "jest", "@typescript-eslint"],
 	env: {
 		browser: true,
 		es2021: true,
@@ -11,30 +11,33 @@ module.exports = {
 	root: true,
 	settings: {
 		react: {
-			version: 'detect',
+			version: "detect",
 		},
 	},
 	extends: [
-		'plugin:react/recommended',
-		'google',
-		'plugin:react/jsx-runtime',
-		'plugin:@typescript-eslint/recommended',
-		'plugin:@typescript-eslint/recommended-requiring-type-checking',
+		"plugin:prettier/recommended",
+		"plugin:react/recommended",
+		"google",
+		"plugin:react/jsx-runtime",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:@typescript-eslint/recommended-requiring-type-checking",
 	],
 	parserOptions: {
 		ecmaFeatures: {
 			jsx: true,
 		},
-		ecmaVersion: 'latest',
-		sourceType: 'module',
-		project: ['./tsconfig.json'],
+		ecmaVersion: "latest",
+		sourceType: "module",
+		project: ["./tsconfig.json"],
 		tsconfigRootDir: __dirname,
 	},
 	rules: {
-		indent: ['error', 'tab'],
-		'no-tabs': 'off',
-		'quote-props': 'off',
+		"prettier/prettier": "error",
+		indent: ["error", "tab"],
+		"no-tabs": "off",
+		"quote-props": "off",
 		quotes: 1,
-		'object-curly-spacing': 0,
+		"object-curly-spacing": 0,
+		"comma-dangle": 0,
 	},
 };

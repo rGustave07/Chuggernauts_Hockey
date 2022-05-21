@@ -36,7 +36,7 @@ module.exports = {
 		indent: ["error", "tab"],
 		"no-tabs": "off",
 		"quote-props": "off",
-		quotes: 1,
+		quotes: ["warn", "double"],
 		"object-curly-spacing": 0,
 		"comma-dangle": 0,
 	},

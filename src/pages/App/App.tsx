@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import logo from '../../logo.svg';
-import './App.css';
+import { useState } from "react";
+import logo from "../../logo.svg";
+import "./App.css";
 
 const App = (): JSX.Element => {
 	const [count, setCount] = useState(0);
@@ -11,10 +11,7 @@ const App = (): JSX.Element => {
 				<img src={logo} className="App-logo" alt="logo" />
 				<p>Hello Vite + React!</p>
 				<p>
-					<button
-						type="button"
-						onClick={() => setCount((count) => count + 1)}
-					>
+					<button type="button" onClick={() => setCount((count) => count + 1)}>
 						count is: {count}
 					</button>
 				</p>
@@ -30,7 +27,7 @@ const App = (): JSX.Element => {
 					>
 						Learn React
 					</a>
-					{' | '}
+					{" | "}
 					<a
 						className="App-link"
 						href="https://vitejs.dev/guide/features.html"

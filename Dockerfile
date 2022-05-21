@@ -17,5 +17,4 @@ ENTRYPOINT ["/entrypoint.sh"]
 # This works
 # CMD ["npm", "run", "dev", "--", "--host"]
 
-# Test this
 CMD ["npm", "run", "dev"]

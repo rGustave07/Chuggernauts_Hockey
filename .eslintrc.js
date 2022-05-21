@@ -1,26 +1,35 @@
-const path = require('path');
-
 module.exports = {
+	parser: '@typescript-eslint/parser',
+	plugins: ['react', 'jest', '@typescript-eslint'],
 	env: {
 		browser: true,
 		es2021: true,
 		jest: true,
+		node: true,
+		commonjs: true,
+	},
+	root: true,
+	settings: {
+		react: {
+			version: 'detect',
+		},
 	},
 	extends: [
 		'plugin:react/recommended',
 		'google',
 		'plugin:react/jsx-runtime',
+		'plugin:@typescript-eslint/recommended',
+		'plugin:@typescript-eslint/recommended-requiring-type-checking',
 	],
-	parser: '@typescript-eslint/parser',
 	parserOptions: {
 		ecmaFeatures: {
 			jsx: true,
 		},
-		tsconfigRootDir: path.resolve('./'),
 		ecmaVersion: 'latest',
 		sourceType: 'module',
+		project: ['./tsconfig.json'],
+		tsconfigRootDir: __dirname,
 	},
-	plugins: ['react', '@typescript-eslint', 'jest'],
 	rules: {
 		indent: ['error', 'tab'],
 		'no-tabs': 'off',

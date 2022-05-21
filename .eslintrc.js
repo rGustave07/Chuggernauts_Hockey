@@ -36,5 +36,7 @@ module.exports = {
 		'quote-props': 'off',
 		quotes: 1,
 		'object-curly-spacing': 0,
+		'max-len': ["error", { "code": 120 }],
+		'comma-dangle': ["error", { "functions": "never"}]
 	},
 };

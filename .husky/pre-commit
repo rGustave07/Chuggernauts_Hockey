@@ -1,4 +1,9 @@
 #!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
+current_dir="$(dirname ${0})"
+project_dir="${current_dir}/.."
+
+source "${current_dir}/_/husky.sh"
 
 npx --no lint-staged
+
+npx --no sort-package-json "${project_dir}/package.json"

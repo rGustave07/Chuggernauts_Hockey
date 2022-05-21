@@ -1,8 +1,6 @@
-# .github/workflows/test.yml
-
-name: Test
+name: Pull Request
 on:
-  push:
+  pull_request:
 jobs:
   verify-tests-pass-before-merge:
     runs-on: ubuntu-latest

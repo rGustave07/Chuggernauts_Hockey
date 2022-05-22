@@ -1,17 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from "react";
+import ReactDOM from "react-dom/client";
 // Move this to using Index pattern
-import App from './pages/App/App';
-import './index.css';
+import App from "./pages/App/App";
+import "./index.css";
 
 let rootAnchor: HTMLElement | null;
 
-if (document.getElementById('root')) {
-	rootAnchor = document.getElementById('root');
+if (document.getElementById("root")) {
+	rootAnchor = document.getElementById("root");
 } else {
-	rootAnchor = document.createElement('div');
+	rootAnchor = document.createElement("div");
 	const errorContent = document.createTextNode(
-		'Error retrieving root HTML anchor'
+		"Error retrieving root HTML anchor"
 	);
 
 	rootAnchor.appendChild(errorContent);

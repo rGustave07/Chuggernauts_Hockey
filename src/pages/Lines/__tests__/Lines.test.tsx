@@ -1,4 +1,4 @@
-import App from "../App";
+import Lines from "../Lines";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
@@ -10,7 +10,12 @@ jest.mock("react-router-dom", (): any => ({
 	useNavigate: () => mockedUseNavigate,
 }));
 
-test("Renders the App I guess....", () => {
-	const { getByText } = render(<App />);
-	expect(getByText("Chuggernauts Hockey")).toBeInTheDocument();
+describe("<Lines />", () => {
+	test("Navigation is rendered and available", () => {
+		const { getByText } = render(<Lines />);
+
+		expect(getByText("Roster")).toBeInTheDocument();
+		expect(getByText("Lines")).toBeInTheDocument();
+		expect(getByText("Schedule")).toBeInTheDocument();
+	});
 });

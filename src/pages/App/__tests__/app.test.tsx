@@ -4,5 +4,5 @@ import "@testing-library/jest-dom";
 
 test("Renders the App I guess....", () => {
 	const { getByText } = render(<App />);
-	expect(getByText("Vite Docs")).toBeInTheDocument();
+	expect(getByText("Chuggernauts Hockey")).toBeInTheDocument();
 });

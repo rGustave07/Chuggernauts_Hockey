@@ -39,5 +39,6 @@ module.exports = {
 		quotes: ["warn", "double"],
 		"object-curly-spacing": 0,
 		"comma-dangle": 0,
+		"max-len": ["error", { code: 120 }],
 	},
 };

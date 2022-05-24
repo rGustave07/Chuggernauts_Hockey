@@ -1,5 +1,2 @@
-vite.config.ts
-babel.config.js
 .eslintrc.js
-lint-staged.config.js
-tailwind.config.js
+*.config.js

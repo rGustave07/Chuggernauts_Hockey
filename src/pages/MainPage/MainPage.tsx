@@ -14,7 +14,7 @@ const MainPage = (): JSX.Element => {
 					<svg
 						className={clsx(
 							"hidden lg:block absolute right-0 inset-y-0 h-full",
-							"w-48 text-white transform translate-x-1/2"
+							"w-96 text-white transform translate-x-1/2"
 						)}
 						fill="currentColor"
 						viewBox="0 0 100 100"

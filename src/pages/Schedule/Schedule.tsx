@@ -7,7 +7,7 @@ const Schedule = (): JSX.Element => {
 		<>
 			<TopNav />
 			<div className="flex flex-col justify-start h-4/5">
-				<h1 className="text-center prose-2xl p-20">
+				<h1 className="text-center prose-2xl p-10 lg:p-20">
 					Chuggernauts Hockey Schedule
 				</h1>
 				<PaddedContainer>

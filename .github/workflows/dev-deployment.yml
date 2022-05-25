@@ -1,0 +1,31 @@
+name: Run tests, Build and deploy development
+on:
+  push:
+    branches:
+      - "DEV" # This is a deployment for DEV environment
+jobs:
+  verify-then-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - name: install dependencies
+        run: npm ci
+      - name: build project
+        run: npm run build
+      - name: deploy to netlify platform
+        uses: nwtgck/actions-netlify@v1.2.3
+        with:
+          production-deploy: true
+          production-branch: DEV
+          publish-dir: "./dist"
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deployed from Github Actions"
+          enable-pull-request-comment: false
+          enable-commit-comment: true
+          overwrites-oull-request-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}

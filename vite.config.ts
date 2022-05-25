@@ -11,5 +11,8 @@ export default defineConfig({
 	// Or you can use # CMD ["npm", "run", "dev", "--", "--host"]
 	server: {
 		host: "0.0.0.0",
+		watch: {
+			usePolling: true,
+		},
 	},
 });

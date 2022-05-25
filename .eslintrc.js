@@ -1,10 +1,9 @@
 module.exports = {
 	parser: "@typescript-eslint/parser",
-	plugins: ["prettier", "react", "jest", "@typescript-eslint"],
+	plugins: ["prettier", "react", "@typescript-eslint"],
 	env: {
 		browser: true,
 		es2021: true,
-		jest: true,
 		node: true,
 		commonjs: true,
 	},

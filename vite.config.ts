@@ -5,7 +5,13 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [react(), eslint(), tsconfigPaths()],
+	plugins: [
+		react(),
+		eslint({
+			overrideConfigFile: "./.eslintrc.js",
+		}),
+		tsconfigPaths(),
+	],
 
 	// this needs to be defined for docker-compose
 	// Or you can use # CMD ["npm", "run", "dev", "--", "--host"]

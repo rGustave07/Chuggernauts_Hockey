@@ -40,5 +40,6 @@ module.exports = {
 		"object-curly-spacing": 0,
 		"comma-dangle": 0,
 		"max-len": ["error", { code: 120 }],
+		"operator-linebreak": 0,
 	},
 };

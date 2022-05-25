@@ -1,18 +1,21 @@
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import { useNavigate } from "react-router-dom";
 
 import clsx from "clsx";
 
 import ChugsLogo from "assets/images/Chuggernauts_Logo.png";
 
 const navigation = [
-	{ name: "Roster", href: "#" },
-	{ name: "Lines", href: "#" },
-	{ name: "Schedule", href: "#" },
+	{ name: "Roster", navLink: "/roster" },
+	{ name: "Lines", navLink: "/lines" },
+	{ name: "Schedule", navLink: "/schedule" },
 ];
 
 const TopNav = (): JSX.Element => {
+	const nav = useNavigate();
+
 	return (
 		<Popover>
 			<div className="relative pt-6 px-4 sm:px-6 lg:px-8">
@@ -22,7 +25,7 @@ const TopNav = (): JSX.Element => {
 				>
 					<div className="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
 						<div className="flex items-center justify-between w-full md:w-auto">
-							<a href="#">
+							<a href="/">
 								<span className="sr-only">Workflow</span>
 								<img
 									alt="Workflow"
@@ -47,13 +50,15 @@ const TopNav = (): JSX.Element => {
 					</div>
 					<div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
 						{navigation.map((item) => (
-							<a
+							<span
 								key={item.name}
-								href={item.href}
-								className="font-medium text-gray-500 hover:text-gray-900"
+								className="font-medium text-gray-500 hover:text-gray-900 cursor-pointer"
+								onClick={() => {
+									nav(item.navLink);
+								}}
 							>
 								{item.name}
-							</a>
+							</span>
 						))}
 					</div>
 				</nav>
@@ -103,11 +108,13 @@ const TopNav = (): JSX.Element => {
 							{navigation.map((item) => (
 								<a
 									key={item.name}
-									href={item.href}
 									className={clsx(
 										"block px-3 py-2 rounded-md text-base",
 										"font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
 									)}
+									onClick={() => {
+										nav(item.navLink);
+									}}
 								>
 									{item.name}
 								</a>

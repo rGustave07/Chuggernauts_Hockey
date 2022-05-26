@@ -33,6 +33,7 @@ module.exports = {
 	},
 	rules: {
 		"prettier/prettier": "error",
+		"require-jsdoc": 0,
 		indent: ["error", "tab"],
 		"no-tabs": "off",
 		"quote-props": "off",

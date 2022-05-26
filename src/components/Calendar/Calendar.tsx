@@ -1,9 +1,14 @@
 /* eslint-disable max-len */
-/* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from "react";
+import React, { useState } from "react";
+
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
-import { Menu, Transition } from "@headlessui/react";
-import { DotsVerticalIcon } from "@heroicons/react/outline";
+
+import CalendarEvent from "components/CalendarEvent";
+
+import Time from "utility/CalendarUtil/calendarUtil";
+import { classNames } from "utility/cssUtil";
+
+const time = new Time();
 
 interface Day {
 	date: string;
@@ -12,84 +17,129 @@ interface Day {
 	isToday?: boolean;
 }
 
-const days: Day[] = [
-	{ date: "2021-12-27" },
-	{ date: "2021-12-28" },
-	{ date: "2021-12-29" },
-	{ date: "2021-12-30" },
-	{ date: "2021-12-31" },
-	{ date: "2022-01-01", isCurrentMonth: true },
-	{ date: "2022-01-02", isCurrentMonth: true },
-	{ date: "2022-01-03", isCurrentMonth: true },
-	{ date: "2022-01-04", isCurrentMonth: true },
-	{ date: "2022-01-05", isCurrentMonth: true },
-	{ date: "2022-01-06", isCurrentMonth: true },
-	{ date: "2022-01-07", isCurrentMonth: true },
-	{ date: "2022-01-08", isCurrentMonth: true },
-	{ date: "2022-01-09", isCurrentMonth: true },
-	{ date: "2022-01-10", isCurrentMonth: true },
-	{ date: "2022-01-11", isCurrentMonth: true },
-	{ date: "2022-01-12", isCurrentMonth: true, isToday: true },
-	{ date: "2022-01-13", isCurrentMonth: true },
-	{ date: "2022-01-14", isCurrentMonth: true },
-	{ date: "2022-01-15", isCurrentMonth: true },
-	{ date: "2022-01-16", isCurrentMonth: true },
-	{ date: "2022-01-17", isCurrentMonth: true },
-	{ date: "2022-01-18", isCurrentMonth: true },
-	{ date: "2022-01-19", isCurrentMonth: true },
-	{ date: "2022-01-20", isCurrentMonth: true },
-	{ date: "2022-01-21", isCurrentMonth: true, isSelected: true },
-	{ date: "2022-01-22", isCurrentMonth: true },
-	{ date: "2022-01-23", isCurrentMonth: true },
-	{ date: "2022-01-24", isCurrentMonth: true },
-	{ date: "2022-01-25", isCurrentMonth: true },
-	{ date: "2022-01-26", isCurrentMonth: true },
-	{ date: "2022-01-27", isCurrentMonth: true },
-	{ date: "2022-01-28", isCurrentMonth: true },
-	{ date: "2022-01-29", isCurrentMonth: true },
-	{ date: "2022-01-30", isCurrentMonth: true },
-	{ date: "2022-01-31", isCurrentMonth: true },
-	{ date: "2022-02-01" },
-	{ date: "2022-02-02" },
-	{ date: "2022-02-03" },
-	{ date: "2022-02-04" },
-	{ date: "2022-02-05" },
-	{ date: "2022-02-06" },
-];
+interface DayEvent {
+	id: number;
+	name: string;
+	imageUrl: string;
+	date: string;
+	start: string;
+	startDatetime: string;
+	end: string;
+	endDatetime: string;
+}
 
-const newLocal =
-	"https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortCurly&accessoriesType=Prescription01&hairColor=Black&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Brown";
-
-const meetings = [
+// Dummy event for the calendar
+const scheduledEvents: DayEvent[] = [
 	{
 		id: 1,
 		name: "Ritter Gustave",
-		imageUrl: newLocal,
+		imageUrl:
+			"https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortCurly&accessoriesType=Prescription01&hairColor=Black&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Brown",
+		date: "2022/05/28",
 		start: "1:00 PM",
 		startDatetime: "2022-01-21T13:00",
 		end: "2:30 PM",
 		endDatetime: "2022-01-21T14:30",
 	},
-	// More meetings...
+	{
+		id: 2,
+		name: "Jake Hamilton",
+		imageUrl:
+			"https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortCurly&accessoriesType=Prescription01&hairColor=Black&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Brown",
+		date: "2022/05/21",
+		start: "1:00 PM",
+		startDatetime: "2022-01-21T13:00",
+		end: "2:30 PM",
+		endDatetime: "2022-01-21T14:30",
+	},
+	{
+		id: 2,
+		name: "Eric Schwartz",
+		imageUrl:
+			"https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortCurly&accessoriesType=Prescription01&hairColor=Black&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Brown",
+		date: "2022/05/05",
+		start: "1:00 PM",
+		startDatetime: "2022-01-21T13:00",
+		end: "2:30 PM",
+		endDatetime: "2022-01-21T14:30",
+	},
+	{
+		id: 2,
+		name: "Jason Davis",
+		imageUrl:
+			"https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortCurly&accessoriesType=Prescription01&hairColor=Black&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Brown",
+		date: "2022/05/11",
+		start: "1:00 PM",
+		startDatetime: "2022-01-21T13:00",
+		end: "2:30 PM",
+		endDatetime: "2022-01-21T14:30",
+	},
 ];
 
-const classNames = (...classes: (string | boolean | undefined)[]): string => {
-	return classes.filter(Boolean).join(" ");
-};
-
 const transformDayString = (dateString: string): string => {
-	const lastSegmentOfDateString = dateString.split("-").pop();
+	const lastSegmentOfDateString = dateString.split("/").pop();
 
 	return lastSegmentOfDateString?.replace(/^0/, "") ?? "";
 };
 
 const Calendar = (): JSX.Element => {
+	const [dates, setDates] = useState<Day[] | []>([]);
+	const [selectedDate, setSelectedDate] = useState<string>("");
+
+	const generateThisMonthsDates = () => {
+		const monthDays = new Date(time.year, time.month + 1, 0).getDate();
+		const generatedDates: Day[] = Array.from(Array(monthDays)).map(
+			(e, dayNumber) => {
+				const dateString = time.buildStandardizedDateString(
+					time.year.toString(),
+					Time.padDigitWithZero(time.month + 1),
+					Time.padDigitWithZero(dayNumber + 1)
+				);
+
+				return {
+					date: dateString,
+					isCurrentMonth: true,
+					isToday: new Date().getDate() === dayNumber + 1,
+					isSelected: dateString === selectedDate,
+				};
+			}
+		);
+
+		const builtDates = [...time.buildOffMonthDays(), ...generatedDates];
+		return builtDates;
+	};
+
+	const eventCheck = (day: string): boolean => {
+		return Boolean(
+			scheduledEvents.filter((event) => event.date === day).length
+		);
+	};
+
+	const updateSelectedDay = (date: string) => {
+		setSelectedDate(date);
+	};
+
+	const renderScheduleText = (): string => {
+		if (selectedDate) {
+			return `Schedule for ${new Date(
+				selectedDate.replace("-", "/")
+			).toDateString()}`;
+		}
+
+		return "Select date to view schedule";
+	};
+
+	React.useEffect(() => {
+		const datesForThisMonth = generateThisMonthsDates();
+		setDates(datesForThisMonth);
+	}, [selectedDate]);
+
 	return (
 		<div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
-			<div className="md:pr-14">
+			<div className="md:pr-14 min-w-[305px]">
 				<div className="flex items-center">
 					<h2 className="flex-auto font-semibold text-gray-900">
-						January 2022
+						{`${time.months[new Date().getMonth()]} ${time.year}`}
 					</h2>
 					<button
 						type="button"
@@ -107,16 +157,16 @@ const Calendar = (): JSX.Element => {
 					</button>
 				</div>
 				<div className="mt-10 grid grid-cols-7 text-center text-xs leading-6 text-gray-500">
+					<div>S</div>
 					<div>M</div>
 					<div>T</div>
 					<div>W</div>
 					<div>T</div>
 					<div>F</div>
 					<div>S</div>
-					<div>S</div>
 				</div>
 				<div className="mt-2 grid grid-cols-7 text-sm">
-					{days.map((day: Day, dayIdx) => (
+					{dates.map((day: Day, dayIdx) => (
 						<div
 							key={day.date}
 							className={classNames(
@@ -141,8 +191,14 @@ const Calendar = (): JSX.Element => {
 									day.isSelected && !day.isToday && "bg-gray-900",
 									!day.isSelected && "hover:bg-gray-200",
 									(day.isSelected || day.isToday) && "font-semibold",
-									"mx-auto flex h-8 w-8 items-center justify-center rounded-full"
+									"mx-auto flex h-8 w-8 items-center justify-center rounded-full",
+									// Probably add a theme object for this color, I dunno we'll do theming later
+									eventCheck(day.date) && "bg-[#a49247]"
 								)}
+								value={day.date}
+								onClick={(_e: React.MouseEvent<HTMLButtonElement>) => {
+									updateSelectedDay(day.date);
+								}}
 							>
 								<time dateTime={day.date}>{transformDayString(day.date)}</time>
 							</button>
@@ -152,84 +208,26 @@ const Calendar = (): JSX.Element => {
 			</div>
 			<section className="mt-12 md:mt-0 md:pl-14">
 				<h2 className="font-semibold text-gray-900">
-					Schedule for <time dateTime="2022-01-21">January 21, 2022</time>
+					<time dateTime={selectedDate}>{renderScheduleText()}</time>
 				</h2>
 				<ol className="mt-4 space-y-1 text-sm leading-6 text-gray-500">
-					{meetings.map((meeting) => (
-						<li
-							key={meeting.id}
-							className="group flex items-center space-x-4 rounded-xl py-2 px-4 focus-within:bg-gray-100 hover:bg-gray-100"
-						>
-							<img
-								src={meeting.imageUrl}
-								alt=""
-								className="h-10 w-10 flex-none rounded-full"
-							/>
-							<div className="flex-auto">
-								<p className="text-gray-900">{meeting.name}</p>
-								<p className="mt-0.5">
-									<time dateTime={meeting.startDatetime}>{meeting.start}</time>{" "}
-									- - <time dateTime={meeting.endDatetime}>{meeting.end}</time>
-								</p>
-							</div>
-							<Menu
-								as="div"
-								className="relative opacity-0 focus-within:opacity-100 group-hover:opacity-100"
-							>
-								<div>
-									<Menu.Button className="-m-2 flex items-center rounded-full p-1.5 text-gray-500 hover:text-gray-600">
-										<span className="sr-only">Open options</span>
-										<DotsVerticalIcon className="h-6 w-6" aria-hidden="true" />
-									</Menu.Button>
-								</div>
-
-								<Transition
-									as={Fragment}
-									enter="transition ease-out duration-100"
-									enterFrom="transform opacity-0 scale-95"
-									enterTo="transform opacity-100 scale-100"
-									leave="transition ease-in duration-75"
-									leaveFrom="transform opacity-100 scale-100"
-									leaveTo="transform opacity-0 scale-95"
-								>
-									<Menu.Items className="focus:outline-none absolute right-0 z-10 mt-2 w-36 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5">
-										<div className="py-1">
-											<Menu.Item>
-												{({ active }) => (
-													<a
-														href="#"
-														className={classNames(
-															active
-																? "bg-gray-100 text-gray-900"
-																: "text-gray-700",
-															"block px-4 py-2 text-sm"
-														)}
-													>
-														Edit
-													</a>
-												)}
-											</Menu.Item>
-											<Menu.Item>
-												{({ active }) => (
-													<a
-														href="#"
-														className={classNames(
-															active
-																? "bg-gray-100 text-gray-900"
-																: "text-gray-700",
-															"block px-4 py-2 text-sm"
-														)}
-													>
-														Cancel
-													</a>
-												)}
-											</Menu.Item>
-										</div>
-									</Menu.Items>
-								</Transition>
-							</Menu>
-						</li>
-					))}
+					{scheduledEvents
+						.filter((event) => event.date === selectedDate)
+						.map((event) => {
+							return (
+								<CalendarEvent
+									key={event.id}
+									id={event.id}
+									name={event.name}
+									imageUrl={event.imageUrl}
+									date={event.date}
+									start={event.start}
+									startDatetime={event.startDatetime}
+									end={event.end}
+									endDatetime={event.endDatetime}
+								/>
+							);
+						})}
 				</ol>
 			</section>
 		</div>

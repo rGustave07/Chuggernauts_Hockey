@@ -5,118 +5,20 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
 
 import CalendarEvent from "components/CalendarEvent";
 
-import Time from "utility/CalendarUtil/calendarUtil";
+import Time, { Day } from "utility/CalendarUtil/calendarUtil";
 import { classNames } from "utility/cssUtil";
+import { dummyScheduledEvents as scheduledEvents } from "utility/CalendarUtil/calendarUtil";
 
 const time = new Time();
-
-interface Day {
-	date: string;
-	isCurrentMonth?: boolean;
-	isSelected?: boolean;
-	isToday?: boolean;
-}
-
-interface DayEvent {
-	id: number;
-	name: string;
-	imageUrl: string;
-	date: string;
-	start: string;
-	startDatetime: string;
-	end: string;
-	endDatetime: string;
-}
-
-// Dummy event for the calendar
-const scheduledEvents: DayEvent[] = [
-	{
-		id: 1,
-		name: "Ritter Gustave",
-		imageUrl:
-			"https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortCurly&accessoriesType=Prescription01&hairColor=Black&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Brown",
-		date: "2022/05/28",
-		start: "1:00 PM",
-		startDatetime: "2022-01-21T13:00",
-		end: "2:30 PM",
-		endDatetime: "2022-01-21T14:30",
-	},
-	{
-		id: 2,
-		name: "Jake Hamilton",
-		imageUrl:
-			"https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortCurly&accessoriesType=Prescription01&hairColor=Black&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Brown",
-		date: "2022/05/21",
-		start: "1:00 PM",
-		startDatetime: "2022-01-21T13:00",
-		end: "2:30 PM",
-		endDatetime: "2022-01-21T14:30",
-	},
-	{
-		id: 2,
-		name: "Eric Schwartz",
-		imageUrl:
-			"https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortCurly&accessoriesType=Prescription01&hairColor=Black&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Brown",
-		date: "2022/05/05",
-		start: "1:00 PM",
-		startDatetime: "2022-01-21T13:00",
-		end: "2:30 PM",
-		endDatetime: "2022-01-21T14:30",
-	},
-	{
-		id: 2,
-		name: "Jason Davis",
-		imageUrl:
-			"https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortCurly&accessoriesType=Prescription01&hairColor=Black&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Brown",
-		date: "2022/05/11",
-		start: "1:00 PM",
-		startDatetime: "2022-01-21T13:00",
-		end: "2:30 PM",
-		endDatetime: "2022-01-21T14:30",
-	},
-];
-
-const transformDayString = (dateString: string): string => {
-	const lastSegmentOfDateString = dateString.split("/").pop();
-
-	return lastSegmentOfDateString?.replace(/^0/, "") ?? "";
-};
 
 const Calendar = (): JSX.Element => {
 	const [dates, setDates] = useState<Day[] | []>([]);
 	const [selectedDate, setSelectedDate] = useState<string>("");
 
-	const generateThisMonthsDates = () => {
-		const monthDays = new Date(time.year, time.month + 1, 0).getDate();
-		const generatedDates: Day[] = Array.from(Array(monthDays)).map(
-			(e, dayNumber) => {
-				const dateString = time.buildStandardizedDateString(
-					time.year.toString(),
-					Time.padDigitWithZero(time.month + 1),
-					Time.padDigitWithZero(dayNumber + 1)
-				);
-
-				return {
-					date: dateString,
-					isCurrentMonth: true,
-					isToday: new Date().getDate() === dayNumber + 1,
-					isSelected: dateString === selectedDate,
-				};
-			}
-		);
-
-		const builtDates = [...time.buildOffMonthDays(), ...generatedDates];
-		return builtDates;
-	};
-
 	const eventCheck = (day: string): boolean => {
 		return Boolean(
 			scheduledEvents.filter((event) => event.date === day).length
 		);
-	};
-
-	const updateSelectedDay = (date: string) => {
-		setSelectedDate(date);
 	};
 
 	const renderScheduleText = (): string => {
@@ -130,7 +32,7 @@ const Calendar = (): JSX.Element => {
 	};
 
 	React.useEffect(() => {
-		const datesForThisMonth = generateThisMonthsDates();
+		const datesForThisMonth = time.buildThisMonthsDates(selectedDate);
 		setDates(datesForThisMonth);
 	}, [selectedDate]);
 
@@ -139,7 +41,7 @@ const Calendar = (): JSX.Element => {
 			<div className="md:pr-14 min-w-[305px]">
 				<div className="flex items-center">
 					<h2 className="flex-auto font-semibold text-gray-900">
-						{`${time.months[new Date().getMonth()]} ${time.year}`}
+						{`${time.months[time.month]} ${time.year}`}
 					</h2>
 					<button
 						type="button"
@@ -196,11 +98,13 @@ const Calendar = (): JSX.Element => {
 									eventCheck(day.date) && "bg-[#a49247]"
 								)}
 								value={day.date}
-								onClick={(_e: React.MouseEvent<HTMLButtonElement>) => {
-									updateSelectedDay(day.date);
+								onClick={() => {
+									setSelectedDate(day.date);
 								}}
 							>
-								<time dateTime={day.date}>{transformDayString(day.date)}</time>
+								<time dateTime={day.date}>
+									{time.transformDayStringToDayDigits(day.date)}
+								</time>
 							</button>
 						</div>
 					))}

@@ -7,26 +7,24 @@ interface Categories {
 	key: "goals" | "assists" | "pims";
 }
 
+interface Player {
+	playerNumber: number;
+	playerFirstName: string;
+	playerLastName: string;
+	avatar: string;
+	stats: {
+		goals: number;
+		assists: number;
+		pims: number;
+		gamesPlayed: number;
+	};
+}
+
 const leaderboardCategories: Categories[] = [
 	{ category: "Goals", key: "goals" },
 	{ category: "Assists", key: "assists" },
 	{ category: "Pims", key: "pims" },
 ];
-
-interface Player {
-	playerNumber: number;
-	playerFirstName: string;
-	playerLastName: string;
-	goals: number;
-	assists: number;
-	pims: number;
-	gamesPlayed: number;
-	avatar: string;
-}
-
-interface LeaderboardData {
-	players: Player[];
-}
 
 const leaderboardData = {
 	players: [
@@ -34,55 +32,56 @@ const leaderboardData = {
 			playerNumber: 32,
 			playerFirstName: "John",
 			playerLastName: "Smith",
-			goals: 3,
-			assists: 0,
-			pims: 12,
-			gamesPlayed: 5,
 			avatar: "",
+			stats: {
+				goals: 3,
+				assists: 0,
+				pims: 12,
+				gamesPlayed: 5,
+			},
 		},
 		{
 			playerNumber: 8,
 			playerFirstName: "Jane",
 			playerLastName: "Blimy",
-			goals: 0,
-			assists: 2,
-			pims: 0,
-			gamesPlayed: 5,
 			avatar: "",
+			stats: {
+				goals: 0,
+				assists: 2,
+				pims: 0,
+				gamesPlayed: 5,
+			},
 		},
 		{
 			playerNumber: 99,
 			playerFirstName: "Gordon",
 			playerLastName: "Bombay",
-			goals: 0,
-			assists: 0,
-			pims: 2,
-			gamesPlayed: 2,
 			avatar:
 				"https://images.unsplash.com/photo-" +
 				"1517841905240-472988babdf9?ixlib=rb-1.2.1" +
 				"&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit" +
 				"=facearea&facepad=2&w=256&h=256&q=80",
+			stats: {
+				goals: 0,
+				assists: 0,
+				pims: 2,
+				gamesPlayed: 2,
+			},
 		},
 		{
 			playerNumber: 0,
 			playerFirstName: "Harry",
 			playerLastName: "Tape",
-			goals: 4,
-			assists: 4,
-			pims: 4,
-			gamesPlayed: 8,
 			avatar: "",
+			stats: {
+				goals: 4,
+				assists: 4,
+				pims: 4,
+				gamesPlayed: 8,
+			},
 		},
 	],
 };
-
-interface Leader {
-	id: number;
-	playerNumber: number;
-	playerName: string;
-	categoryCount: number;
-}
 
 const Leaderboard = (): JSX.Element => {
 	const [category, setCategory] = useState("goals");
@@ -90,7 +89,7 @@ const Leaderboard = (): JSX.Element => {
 	const renderTable = (selectedCategory: Categories["key"]) => {
 		const sortedPlayerArray = leaderboardData.players.sort(
 			(playerA: Player, playerB: Player) =>
-				playerB[selectedCategory] - playerA[selectedCategory]
+				playerB.stats[selectedCategory] - playerA.stats[selectedCategory]
 		);
 
 		return (
@@ -104,41 +103,50 @@ const Leaderboard = (): JSX.Element => {
 										<tr>
 											<th
 												scope="col"
-												className="py-3.5 pl-4 pr-3 text-left text-sm \
-													font-semibold text-gray-900 sm:pl-6"
+												className={clsx(
+													"py-3.5 pl-4 pr-3 text-left text-sm",
+													"font-semibold text-gray-900 sm:pl-6"
+												)}
 											>
 												Rank
 											</th>
 											<th
 												scope="col"
-												className="px-3 py-3.5 text-left text-sm \
-															font-semibold text-gray-900"
+												className={clsx(
+													"px-3 py-3.5 text-left text-sm",
+													"font-semibold text-gray-900"
+												)}
 											>
 												<a href="#" className="group inline-flex">
 													Player
 												</a>
 											</th>
-											{leaderboardCategories.map((item, i) => (
+											{leaderboardCategories.map((item) => (
 												<th
 													key={item.category}
 													scope="col"
-													className="px-3 py-3.5 text-left text-sm /
-																		font-semibold text-gray-900"
+													className={clsx(
+														"px-3 py-3.5 text-left text-sm",
+														"font-semibold text-gray-900"
+													)}
 												>
 													<a href="#" className="group inline-flex">
 														{item.category}
 														<span
-															className="invisible ml-2 flex-none rounded /
-													text-gray-400 group-hover:visible group-focus:visible"
+															className={clsx(
+																"invisible ml-2 flex-none rounded",
+																"text-gray-400 group-hover:visible",
+																"group-focus:visible"
+															)}
 														>
 															<ChevronDownIcon
 																className={clsx(
-																	"invisible ml-2 h-5 w-5 flex-none rounded ",
-																	"text-gray-400 group-hover:visible ",
+																	"invisible ml-2 h-5 w-5 flex-none rounded",
+																	"text-gray-400 group-hover:visible",
 																	"group-focus:visible"
 																)}
 																aria-hidden="true"
-																onClick={(e) => {
+																onClick={() => {
 																	setCategory(item.key);
 																}}
 															/>
@@ -166,10 +174,11 @@ const Leaderboard = (): JSX.Element => {
 															</div>
 														) : (
 															<span
-																className={
-																	"inline-flex items-center justify-" +
-																	"center h-10 w-10 rounded-full bg-gray-500"
-																}
+																className={clsx(
+																	"inline-flex items-center",
+																	"justify-center h-10 w-10",
+																	"rounded-full bg-gray-500"
+																)}
 															>
 																<span
 																	className={
@@ -191,12 +200,12 @@ const Leaderboard = (): JSX.Element => {
 														</div>
 													</div>
 												</td>
-												{leaderboardCategories.map((cat, i) => (
+												{leaderboardCategories.map((cat) => (
 													<td
 														key={Math.random()}
 														className="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
 													>
-														{item[cat.key]}
+														{item.stats[cat.key]}
 													</td>
 												))}
 											</tr>

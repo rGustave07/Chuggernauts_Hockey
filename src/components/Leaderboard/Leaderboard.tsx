@@ -11,6 +11,7 @@ interface Player {
 	playerNumber: number;
 	playerFirstName: string;
 	playerLastName: string;
+	playerType: string;
 	avatar: string;
 	stats: {
 		goals: number;
@@ -32,6 +33,7 @@ const leaderboardData = {
 			playerNumber: 32,
 			playerFirstName: "John",
 			playerLastName: "Smith",
+			playerType: "rostered",
 			avatar: "",
 			stats: {
 				goals: 3,
@@ -44,6 +46,7 @@ const leaderboardData = {
 			playerNumber: 8,
 			playerFirstName: "Jane",
 			playerLastName: "Blimy",
+			playerType: "rostered",
 			avatar: "",
 			stats: {
 				goals: 0,
@@ -56,6 +59,7 @@ const leaderboardData = {
 			playerNumber: 99,
 			playerFirstName: "Gordon",
 			playerLastName: "Bombay",
+			playerType: "rostered",
 			avatar:
 				"https://images.unsplash.com/photo-" +
 				"1517841905240-472988babdf9?ixlib=rb-1.2.1" +
@@ -72,6 +76,7 @@ const leaderboardData = {
 			playerNumber: 0,
 			playerFirstName: "Harry",
 			playerLastName: "Tape",
+			playerType: "sub",
 			avatar: "",
 			stats: {
 				goals: 4,

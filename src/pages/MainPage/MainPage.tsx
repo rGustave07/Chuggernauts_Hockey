@@ -6,11 +6,14 @@ const MainPage = (): JSX.Element => {
 	return (
 		<div className="relative bg-white overflow-hidden h-screen">
 			<div>
-				<div className="max-w-7xl mx-auto">
+				<div className={clsx("max-w-7xl mx-auto")}>
 					<div
 						className={clsx(
 							"relative z-10 pb-8 bg-white",
-							"sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32 h-[50vh]"
+							"sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32 h-[50vh]",
+							"sm:bg-cover sm:bg-center md:bg-cover md:bg-center",
+							"sm:bg-[url('/public/img/hockey.avif')] md:bg-[url('/public/img/hockey.avif')]",
+							"lg:bg-[url('')] bg-opacity-20"
 						)}
 					>
 						<svg
@@ -29,7 +32,7 @@ const MainPage = (): JSX.Element => {
 						<TopNav />
 						<main
 							className={clsx(
-								"mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28"
+								"max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-10 lg:mt-1 lg:px-12 xl:mt-1"
 							)}
 						>
 							<div className="sm:text-center lg:text-left">
@@ -68,7 +71,7 @@ const MainPage = (): JSX.Element => {
 						</main>
 					</div>
 				</div>
-				<div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 h-full max-h-[50vh]">
+				<div className="hidden lg:block lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 h-full max-h-[50vh]">
 					<img
 						className="h-full w-full object-cover p-5 lg:w-full"
 						// eslint-disable-next-line max-len

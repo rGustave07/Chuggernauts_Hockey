@@ -1,4 +1,4 @@
-import TopNav from "components/TopNav";
+import TopNav from "@presentation/components/TopNav";
 
 const Roster = (): JSX.Element => {
 	return (

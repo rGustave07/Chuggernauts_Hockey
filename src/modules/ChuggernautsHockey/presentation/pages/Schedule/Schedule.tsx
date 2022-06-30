@@ -1,6 +1,6 @@
-import TopNav from "components/TopNav";
-import PaddedContainer from "components/Containers/PaddedContainer";
-import Calendar from "components/Calendar";
+import TopNav from "@presentation/components/TopNav";
+import PaddedContainer from "@presentation/components/Containers/PaddedContainer";
+import Calendar from "@presentation/components/Calendar";
 
 const Schedule = (): JSX.Element => {
 	return (

@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { App, Roster, Lines, Schedule } from "../pages";
+import { App, Roster, Lines, Schedule } from "@presentation/pages";
 
 const Routing = (): JSX.Element => {
 	return (

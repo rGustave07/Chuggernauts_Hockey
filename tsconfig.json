@@ -18,9 +18,11 @@
 		"jsx": "react-jsx",
 		"baseUrl": "./src",
 		"paths": {
-			"assets/*": ["/../assets/*"],
-			"components": ["/components/*"],
-			"pages": ["/pages/*"]
+			"assets/*": ["/assets/*"],
+			"@application/*": ["modules/ChuggernautsHockey/application/*"],
+			"@domain/*": ["modules/ChuggernautsHockey/domain/*"],
+			"@infrastructure/*": ["modules/ChuggernautsHockey/infrastructure/*"],
+			"@presentation/*": ["modules/ChuggernautsHockey/presentation/*"]
 		}
 	},
 	"include": ["**/*.ts", "**/*.tsx", "./src/*"],

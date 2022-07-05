@@ -34,7 +34,7 @@ module.exports = {
 	rules: {
 		"prettier/prettier": "error",
 		"require-jsdoc": 0,
-		indent: ["error", "tab"],
+		indent: ["error", "tab", { SwitchCase: 1 }],
 		"no-tabs": "off",
 		"quote-props": "off",
 		quotes: ["warn", "double"],

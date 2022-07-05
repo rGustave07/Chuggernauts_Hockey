@@ -1,4 +1,4 @@
-import MainPage from "pages/MainPage";
+import MainPage from "@presentation/pages/MainPage";
 
 const App = (): JSX.Element => {
 	return <MainPage />;

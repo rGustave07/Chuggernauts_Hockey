@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Routing from "./routing";
+import Routing from "@application/routing";
 
 import "./index.css";
 

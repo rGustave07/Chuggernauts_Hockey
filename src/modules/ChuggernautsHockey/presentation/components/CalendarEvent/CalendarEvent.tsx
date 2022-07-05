@@ -1,7 +1,7 @@
 import { Menu, Transition } from "@headlessui/react";
 import { DotsVerticalIcon } from "@heroicons/react/outline";
 import { Fragment } from "react";
-import { classNames } from "utility/cssUtil";
+import { classNames } from "@domain/utility/cssUtil";
 
 interface CalendarEventProps {
 	id: number;

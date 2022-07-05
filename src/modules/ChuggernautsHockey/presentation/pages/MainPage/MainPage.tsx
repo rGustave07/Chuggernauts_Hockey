@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import TopNav from "components/TopNav";
+import TopNav from "@presentation/components/TopNav";
 
 const MainPage = (): JSX.Element => {
 	return (

@@ -3,11 +3,11 @@ import React, { useState } from "react";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
 
-import CalendarEvent from "components/CalendarEvent";
+import CalendarEvent from "modules/ChuggernautsHockey/presentation/components/CalendarEvent";
 
-import Time, { Day } from "utility/CalendarUtil/calendarUtil";
-import { classNames } from "utility/cssUtil";
-import { dummyScheduledEvents as scheduledEvents } from "utility/CalendarUtil/calendarUtil";
+import Time, { Day } from "@domain/utility/CalendarUtil/calendarUtil";
+import { classNames } from "@domain/utility/cssUtil";
+import { dummyScheduledEvents as scheduledEvents } from "@domain/utility/CalendarUtil/calendarUtil";
 
 const time = new Time();
 

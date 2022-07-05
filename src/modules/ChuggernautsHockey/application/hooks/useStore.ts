@@ -1,8 +1,8 @@
 import SessionService from "@domain/services/SessionService";
 import UserService from "@domain/services/UserService";
 
-import sessionRepo from "@infrastructure/repositories/Session.Repository";
-import userRepo from "@infrastructure/repositories/User.Repository";
+import sessionRepo from "@infrastructure/store/repositories/Session.Repository";
+import userRepo from "@infrastructure/store/repositories/User.Repository";
 import { RootState } from "@infrastructure/store/redux/storeConfiguration";
 
 const sessionService = new SessionService(sessionRepo);

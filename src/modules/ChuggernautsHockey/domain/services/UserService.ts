@@ -1,4 +1,4 @@
-import UserRepositoryInterface from "@infrastructure/interfaces/User.Repository.Interface";
+import UserRepositoryInterface from "@infrastructure/store/interfaces/User.Repository.Interface";
 
 export default class UserService {
 	constructor(protected userRepo: UserRepositoryInterface) {}

@@ -1,4 +1,4 @@
-import SessionRepositoryInterface from "@infrastructure/interfaces/Session.Repository.Interface";
+import SessionRepositoryInterface from "@infrastructure/store/interfaces/Session.Repository.Interface";
 import {
 	SessionState,
 	SessionAction,

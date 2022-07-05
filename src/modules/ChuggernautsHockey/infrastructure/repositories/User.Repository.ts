@@ -1,12 +1,19 @@
 import UserRepositoryInterface from "@infrastructure/interfaces/User.Repository.Interface";
 import ApplicationStore from "@infrastructure/store/redux";
+import {
+	UserAction,
+	UserState,
+} from "@infrastructure/store/redux/reducers/user";
 
+// Refer to SessionRepository for information on this implementation
 class UserRepository implements UserRepositoryInterface {
-	// Logic for retrieving data and setting data goes into this layer
-	// AKA How the data is retrieved
-	public getUserMetaData() {
-		return ApplicationStore.getState().user.playerMetaData;
+	public userDispatch(action: UserAction) {
+		ApplicationStore.dispatch(action);
+	}
+
+	public getState(): UserState {
+		return ApplicationStore.getState().user;
 	}
 }
 
-export default UserRepository;
+export default new UserRepository();

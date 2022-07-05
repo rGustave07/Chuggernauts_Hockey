@@ -1,7 +1,11 @@
-import { UserState } from "@infrastructure/store/redux/reducers/user";
+import {
+	UserAction,
+	UserState,
+} from "@infrastructure/store/redux/reducers/user";
 
 interface UserRepositoryInterface {
-	getUserMetaData: () => UserState["playerMetaData"];
+	userDispatch: (action: UserAction) => void;
+	getState: () => UserState;
 }
 
 export default UserRepositoryInterface;

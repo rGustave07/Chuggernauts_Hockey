@@ -1,7 +1,11 @@
-import { SessionState } from "@infrastructure/store/redux/reducers/session";
+import {
+	SessionAction,
+	SessionState,
+} from "@infrastructure/store/redux/reducers/session";
 
 interface SessionRepositoryInterface {
-	getSessionData: () => SessionState;
+	getState: () => SessionState;
+	sessionDispatch: (action: SessionAction) => void;
 }
 
 export default SessionRepositoryInterface;

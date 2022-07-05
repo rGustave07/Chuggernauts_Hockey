@@ -1,4 +1,4 @@
-import SessionRepositoryInterface from "@infrastructure/interfaces/Session.Repository.Interface";
+import SessionRepositoryInterface from "@infrastructure/store/interfaces/Session.Repository.Interface";
 
 // Services are fully separated from store/repository level implementations
 // Business logic should live here to avoid being tightly coupled to a

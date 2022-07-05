@@ -1,4 +1,4 @@
-import UserRepositoryInterface from "@infrastructure/interfaces/User.Repository.Interface";
+import UserRepositoryInterface from "@infrastructure/store/interfaces/User.Repository.Interface";
 import ApplicationStore from "@infrastructure/store/redux";
 import {
 	UserAction,
